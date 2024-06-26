@@ -4,6 +4,11 @@
             <tab idMso="TabAddIns">
                 <group id="MyCustomGroup" label="My Add-in">
                     <button id="MyCustomButton" imageMso="HappyFace" label="Click Me" size="large" onAction="MyCustomMacro" />
+                    <button id="dogTag" imageMso="Piggy" label="Tag Dog" onAction="TagAsDogs" />
+                    <button id="ponyTag" imageMso="SadFace" label="Tag Pony" onAction="TagAsPonies" />
+                    <button id="dogShow" imageMso="MicrosoftVisualFoxPro" label="Dog Show" size="large" onAction="DogShow" />
+                    <button id="ponyShow" imageMso="MicrosoftPowerPoint" label="Pony Show" size="large" onAction="PonyShow" />
+                    <button id="dogAndPony" imageMso="QueryBuilder" label="Dog and Pony Show" size="large" onAction="DogAndPonyShow" />
                 </group>
             </tab>
         </tabs>

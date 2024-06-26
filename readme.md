@@ -3,11 +3,11 @@
 # Build
 
 - New presentation
-- Tools > Macro > Visual Basic Editor
-- Create new module, paste code.vba
 - Save as test.pptm
 - `./build.sh`, this produces test1.pptm
-- Open again and Export > ppam
+- Open, Tools > Macro > Visual Basic Editor
+- Create new module, paste code.vba
+- Export > test1.ppam
 - Users can now do Tools > PowerPoint Add-ins and select the file
 
 # Enabling macros on macOS
@@ -30,5 +30,11 @@ https://www.anirdesh.com/ribbon/callbacks-1.php
 
 mac security problems
 https://stackoverflow.com/questions/57733141/developing-a-custom-ribbon-add-in-for-powerpoint-office-365-mac
+
+dog and pony show
+https://answers.microsoft.com/en-us/msoffice/forum/all/powerpoint-keywords-as-filters/cc4efffa-d487-43cd-9ad6-e55e15f086c5
+
+icons
+https://bert-toolkit.com/imagemso-list.html
 
 -->
