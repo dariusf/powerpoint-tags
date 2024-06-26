@@ -16,3 +16,19 @@ This is required for buttons to work. Manually running macros works out of the b
 
 - PowerPoint > Preferences > Security > Macro Security > Enable all macros
 - Restart
+
+<!--
+
+customui
+https://answers.microsoft.com/en-us/msoffice/forum/all/xml-ribbon-powerpoint/5168a260-0941-4260-903a-b783d6782361
+
+docs
+https://learn.microsoft.com/en-us/openspecs/office_standards/ms-customui/846e8fb6-07d3-460b-816b-bcfae841c95b
+
+usage
+https://www.anirdesh.com/ribbon/callbacks-1.php
+
+mac security problems
+https://stackoverflow.com/questions/57733141/developing-a-custom-ribbon-add-in-for-powerpoint-office-365-mac
+
+-->
