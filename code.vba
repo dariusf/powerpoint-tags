@@ -103,8 +103,8 @@ Sub SearchAndCopySlides()
     
     If newFileName <> "False" Then
         destinationPresentation.SaveAs newFileName
-        MsgBox "Slides copied and saved successfully!", vbInformation
+        ' MsgBox "Slides copied and saved successfully!", vbInformation
     Else
-        MsgBox "Operation cancelled.", vbExclamation
+        ' MsgBox "Operation cancelled.", vbExclamation
     End If
 End Sub
