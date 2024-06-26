@@ -10,6 +10,9 @@
                     <button id="ponyShow" imageMso="MicrosoftPowerPoint" label="Pony Show" size="large" onAction="PonyShow" />
                     <button id="dogAndPony" imageMso="QueryBuilder" label="Dog and Pony Show" size="large" onAction="DogAndPonyShow" />
                 </group>
+                <group id="MyCustomGroup1" label="My Add-in 2">
+                    <button id="search" imageMso="ApplyFilter" label="Filter" size="large" onAction="SearchAndCopySlides" />
+                </group>
             </tab>
         </tabs>
     </ribbon>
