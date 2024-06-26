@@ -4,7 +4,7 @@
 
 - New presentation
 - Save as test.pptm
-- `./build.sh`, this produces test1.pptm
+- `./enrich.sh`, this produces test1.pptm
 - Open, Tools > Macro > Visual Basic Editor
 - Create new module, paste code.vba
 - Export > test1.ppam
