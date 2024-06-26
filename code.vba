@@ -9,14 +9,14 @@ Sub MyCustomMacro1()
 End Sub
 
 Sub TagAsDogs()
-    Dim oSl As Slide
+    Dim oSl As slide
     For Each oSl In ActiveWindow.Selection.SlideRange
         oSl.Tags.Add "DOG", "Y"
     Next
 End Sub
 
 Sub TagAsPonies()
-    Dim oSl As Slide
+    Dim oSl As slide
     For Each oSl In ActiveWindow.Selection.SlideRange
         oSl.Tags.Add "PONY", "Y"
     Next
@@ -24,7 +24,7 @@ End Sub
 
 Sub DogShow()
 ' Hide any slide w/o a DOG tag
-    Dim oSl As Slide
+    Dim oSl As slide
     For Each oSl In ActivePresentation.Slides
         If oSl.Tags("DOG") <> "Y" Then
             oSl.SlideShowTransition.Hidden = True
@@ -34,7 +34,7 @@ End Sub
 
 Sub PonyShow()
 ' Hide any slide w/o a PONY tag
-    Dim oSl As Slide
+    Dim oSl As slide
     For Each oSl In ActivePresentation.Slides
         If oSl.Tags("PONY") <> "Y" Then
             oSl.SlideShowTransition.Hidden = True
@@ -44,13 +44,31 @@ End Sub
 
 Sub DogAndPonyShow()
 ' Unhide all of the slides
-    Dim oSl As Slide
+    Dim oSl As slide
     For Each oSl In ActivePresentation.Slides
         oSl.SlideShowTransition.Hidden = False
     Next
 End Sub
 
-Sub SearchAndCopySlides()
+Sub EditTags()
+    Dim oSl As slide
+    Dim Tags As String
+    If ActivePresentation.Slides.Count > 1 Then
+        Tags = InputBox("Tags to set", "Batch editing")
+        For Each oSl In ActivePresentation.Slides
+            oSl.Tags.Delete "TAGS"
+            oSl.Tags.Add "TAGS", Tags
+        Next
+    Else
+        For Each oSl In ActivePresentation.Slides
+            Tags = InputBox("Tags to edit", "Single slide", oSl.Tags("TAGS"))
+            oSl.Tags.Delete "TAGS"
+            oSl.Tags.Add "TAGS", Tags
+        Next
+    End If
+End Sub
+
+Sub ReallySearch(useTags As String)
     Dim searchWord As String
     Dim sourcePresentation As Presentation
     Dim destinationPresentation As Presentation
@@ -60,6 +78,10 @@ Sub SearchAndCopySlides()
     
     ' Define the word to search for
     searchWord = InputBox("Enter the word to search for:", "Search Word")
+    
+    If searchWord = "" Then
+        Exit Sub
+    End If
     
     ' Reference the current presentation
     Set sourcePresentation = ActivePresentation
@@ -73,20 +95,26 @@ Sub SearchAndCopySlides()
     ' Loop through each slide in the source presentation
     For Each slide In sourcePresentation.Slides
         slideFound = False
-        ' Check each shape on the slide
-        Dim shape As shape
-        For Each shape In slide.Shapes
-            ' Check if the shape contains text
-            If shape.HasTextFrame Then
-                If shape.TextFrame.HasText Then
-                    ' Check if the text contains the search word
-                    If InStr(1, shape.TextFrame.TextRange.Text, searchWord, vbTextCompare) > 0 Then
-                        slideFound = True
-                        Exit For
+        If useTags Then
+            If InStr(1, slide.Tags("TAGS"), searchWord, vbTextCompare) > 0 Then
+                slideFound = True
+            End If
+        Else
+            ' Check each shape on the slide
+            Dim shape As shape
+            For Each shape In slide.Shapes
+                ' Check if the shape contains text
+                If shape.HasTextFrame Then
+                    If shape.TextFrame.HasText Then
+                        ' Check if the text contains the search word
+                        If InStr(1, shape.TextFrame.TextRange.Text, searchWord, vbTextCompare) > 0 Then
+                            slideFound = True
+                            Exit For
+                        End If
                     End If
                 End If
-            End If
-        Next shape
+            Next shape
+        End If
         
         ' If the slide contains the search word, copy it to the new presentation
         If slideFound Then
@@ -108,3 +136,15 @@ Sub SearchAndCopySlides()
         ' MsgBox "Operation cancelled.", vbExclamation
     End If
 End Sub
+
+Sub SearchAndCopySlides()
+    ReallySearch (False)
+End Sub
+
+Sub SearchTagsAndCopySlides()
+    ReallySearch (True)
+End Sub
+
+
+
+

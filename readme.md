@@ -37,4 +37,7 @@ https://answers.microsoft.com/en-us/msoffice/forum/all/powerpoint-keywords-as-fi
 icons
 https://bert-toolkit.com/imagemso-list.html
 
+api
+https://learn.microsoft.com/en-us/office/vba/api/powerpoint.tags
+
 -->

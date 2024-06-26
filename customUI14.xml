@@ -3,15 +3,15 @@
         <tabs>
             <tab idMso="TabAddIns">
                 <group id="MyCustomGroup" label="My Add-in">
-                    <button id="MyCustomButton" imageMso="HappyFace" label="Click Me" size="large" onAction="MyCustomMacro" />
-                    <button id="dogTag" imageMso="Piggy" label="Tag Dog" onAction="TagAsDogs" />
-                    <button id="ponyTag" imageMso="SadFace" label="Tag Pony" onAction="TagAsPonies" />
-                    <button id="dogShow" imageMso="MicrosoftVisualFoxPro" label="Dog Show" size="large" onAction="DogShow" />
-                    <button id="ponyShow" imageMso="MicrosoftPowerPoint" label="Pony Show" size="large" onAction="PonyShow" />
-                    <button id="dogAndPony" imageMso="QueryBuilder" label="Dog and Pony Show" size="large" onAction="DogAndPonyShow" />
-                </group>
-                <group id="MyCustomGroup1" label="My Add-in 2">
-                    <button id="search" imageMso="ApplyFilter" label="Filter" size="large" onAction="SearchAndCopySlides" />
+                    <!-- <button id="MyCustomButton" imageMso="HappyFace" label="Click Me" size="large" onAction="MyCustomMacro" /> -->
+                    <!-- <button id="dogTag" imageMso="Piggy" label="Tag Dog" onAction="TagAsDogs" /> -->
+                    <!-- <button id="ponyTag" imageMso="SadFace" label="Tag Pony" onAction="TagAsPonies" /> -->
+                    <!-- <button id="dogShow" imageMso="MicrosoftVisualFoxPro" label="Dog Show" size="large" onAction="DogShow" /> -->
+                    <!-- <button id="ponyShow" imageMso="MicrosoftPowerPoint" label="Pony Show" size="large" onAction="PonyShow" /> -->
+                    <!-- <button id="dogAndPony" imageMso="QueryBuilder" label="Dog and Pony Show" size="large" onAction="DogAndPonyShow" /> -->
+                    <button id="editTags" imageMso="MailMergeRecipientsEditList" label="Edit Tags" size="large" onAction="EditTags" />
+                    <button id="exportText" imageMso="CustomPageNumberGallery" label="Export (Tags)" size="large" onAction="SearchTagsAndCopySlides" />
+                    <button id="exportTags" imageMso="ResearchPane" label="Export (Text)" size="large" onAction="SearchAndCopySlides" />
                 </group>
             </tab>
         </tabs>
