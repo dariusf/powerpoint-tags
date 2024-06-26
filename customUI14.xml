@@ -2,7 +2,7 @@
     <ribbon>
         <tabs>
             <tab idMso="TabAddIns">
-                <group id="MyCustomGroup" label="My Add-in">
+                <group id="MyCustomGroup" label="Tags">
                     <!-- <button id="MyCustomButton" imageMso="HappyFace" label="Click Me" size="large" onAction="MyCustomMacro" /> -->
                     <!-- <button id="dogTag" imageMso="Piggy" label="Tag Dog" onAction="TagAsDogs" /> -->
                     <!-- <button id="ponyTag" imageMso="SadFace" label="Tag Pony" onAction="TagAsPonies" /> -->

@@ -50,18 +50,85 @@ Sub DogAndPonyShow()
     Next
 End Sub
 
+Function DeduplicateCommaDelimitedStrings(ByVal inputList As Variant) As String
+    Dim dict As Object
+    Set dict = CreateObject("Scripting.Dictionary")
+    
+    Dim i As Integer
+    Dim items() As String
+    Dim item As Variant
+    
+    ' Loop through each string in the input list
+    For i = LBound(inputList) To UBound(inputList)
+        ' Split the string into individual items
+        items = Split(inputList(i), ",")
+        
+        ' Add each item to the dictionary (which automatically handles duplicates)
+        For Each item In items
+            If Not dict.exists(Trim(item)) Then
+                dict.Add Trim(item), Nothing
+            End If
+        Next item
+    Next i
+    
+    ' Join the keys of the dictionary into a comma-delimited string
+    DeduplicateCommaDelimitedStrings = Join(dict.keys, ",")
+End Function
+
+Function BuildInputArrayFromSelection() As Variant
+    Dim slideRange As slideRange
+    Dim slide As slide
+    Dim shape As shape
+    Dim inputArray() As String
+    Dim itemList As String
+    Dim i As Integer
+    
+    ' Initialize the slideRange with the selected slides
+    Set slideRange = ActiveWindow.Selection.SlideRange
+    
+    ' Initialize a temporary collection to hold the comma-delimited strings
+    Dim tempCollection As Collection
+    Set tempCollection = New Collection
+    
+    ' Loop through each slide in the slideRange
+    For Each slide In slideRange
+        tempCollection.Add shape.TextFrame.TextRange.Text
+    Next slide
+    
+    ' Resize the inputArray to match the number of items in the collection
+    ReDim inputArray(1 To tempCollection.Count)
+    
+    ' Copy the items from the collection to the array
+    For i = 1 To tempCollection.Count
+        inputArray(i) = tempCollection(i)
+    Next i
+    
+    ' Return the array
+    BuildInputArrayFromSelection = inputArray
+End Function
+
+
 Sub EditTags()
     Dim oSl As slide
     Dim Tags As String
-    If ActivePresentation.Slides.Count > 1 Then
+    If ActiveWindow.Selection.SlideRange.Count > 1 Then
+        ' Tags = DeduplicateCommaDelimitedStrings(BuildInputArrayFromSelection())
+        ' Tags = InputBox("Tags to set", "Batch editing", Tags)
         Tags = InputBox("Tags to set", "Batch editing")
-        For Each oSl In ActivePresentation.Slides
+        If Tags = "" Then
+            Exit Sub
+        End If
+        For Each oSl In ActiveWindow.Selection.SlideRange
             oSl.Tags.Delete "TAGS"
             oSl.Tags.Add "TAGS", Tags
         Next
     Else
-        For Each oSl In ActivePresentation.Slides
-            Tags = InputBox("Tags to edit", "Single slide", oSl.Tags("TAGS"))
+        For Each oSl In ActiveWindow.Selection.SlideRange
+            ' this only happens once
+            Tags = InputBox("Tags to edit", "Editing tags of slide", oSl.Tags("TAGS"))
+            If Tags = "" Then
+                Exit Sub
+            End If
             oSl.Tags.Delete "TAGS"
             oSl.Tags.Add "TAGS", Tags
         Next
@@ -77,8 +144,11 @@ Sub ReallySearch(useTags As String)
     Dim slideFound As Boolean
     
     ' Define the word to search for
-    searchWord = InputBox("Enter the word to search for:", "Search Word")
-    
+    If useTags Then
+        searchWord = InputBox("Enter the tag to search for:", "Search Tag")
+    Else
+        searchWord = InputBox("Enter the word to search for:", "Search Word")
+    End If
     If searchWord = "" Then
         Exit Sub
     End If
@@ -96,6 +166,7 @@ Sub ReallySearch(useTags As String)
     For Each slide In sourcePresentation.Slides
         slideFound = False
         If useTags Then
+            ' TODO split the tags, and check if any match, then update the message to tags
             If InStr(1, slide.Tags("TAGS"), searchWord, vbTextCompare) > 0 Then
                 slideFound = True
             End If
@@ -127,8 +198,7 @@ Sub ReallySearch(useTags As String)
     ' Save the new presentation
     Dim newFileName As String
     newFileName = "CopiedSlides.pptx"
-    
-    
+
     If newFileName <> "False" Then
         destinationPresentation.SaveAs newFileName
         ' MsgBox "Slides copied and saved successfully!", vbInformation
@@ -144,7 +214,3 @@ End Sub
 Sub SearchTagsAndCopySlides()
     ReallySearch (True)
 End Sub
-
-
-
-
